@@ -1,8 +1,8 @@
-const getAllPokemons = require('./getAllPokemonsController');
-const getPokemonById = require('./getPokemonByIdController');
-const getPokemonByName = require('./getPokemonByNameController');
-const createPokemon = require('./createPokemonController');
-const getAllTypes = require('./getAllTypesController');
+const getAllPokemons = require('./getAllPokemons');
+const getPokemonById = require('./getPokemonById');
+const getPokemonByName = require('./getPokemonByName');
+const createPokemon = require('./createPokemon');
+const getAllTypes = require('./getAllTypes');
 
 module.exports = {
   getAllPokemons,
