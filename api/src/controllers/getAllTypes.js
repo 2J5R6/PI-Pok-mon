@@ -3,17 +3,18 @@ const axios = require('axios');
 
 module.exports = async (req, res, next) => {
   try {
-    let types = await Type.findAll();
+    const response = await axios.get('https://pokeapi.co/api/v2/type');
+    const apiTypes = response.data.results;
 
-    // Si no hay tipos en la base de datos, los obtenemos de la API y los guardamos en la base de datos.
-    if (types.length === 0) {
-      const response = await axios.get('https://pokeapi.co/api/v2/type');
-      const apiTypes = response.data.results;
-
-      // Guardamos los tipos en la base de datos
-      types = await Type.bulkCreate(apiTypes.map(type => ({ name: type.name })));
+    // Verificamos y guardamos los tipos en la base de datos si no existen
+    for (let type of apiTypes) {
+      let [instance, created] = await Type.findOrCreate({
+        where: { name: type.name },
+        defaults: { name: type.name }
+      });
     }
 
+    const types = await Type.findAll();
     return res.status(200).send(types);
   } catch (error) {
     next(error);

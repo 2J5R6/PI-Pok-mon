@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
 
     // Obtener el ID más grande en la base de datos y agregar 1 para generar un ID único
     const maxId = await Pokemon.max('id');
-    const newId = maxId > 100 ? maxId + 1 : 101;
+    const newId = maxId && maxId > 100 ? maxId + 1 : 101;
 
     // Creamos el Pokémon en la base de datos
     const newPokemon = await Pokemon.create({
@@ -25,7 +25,13 @@ module.exports = async (req, res, next) => {
     const typesInDb = await Type.findAll({ where: { name: types } });
     await newPokemon.setTypes(typesInDb);
 
-    return res.status(201).send(newPokemon);
+    // Buscamos el Pokémon creado con sus tipos asociados para devolverlo en la respuesta
+    const pokemonWithTypes = await Pokemon.findOne({
+      where: { id: newId },
+      include: Type
+    });
+
+    return res.status(201).send(pokemonWithTypes);
   } catch (error) {
     next(error);
   }

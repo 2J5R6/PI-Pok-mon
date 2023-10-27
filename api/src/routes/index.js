@@ -6,6 +6,7 @@ const {
     getPokemonById,
     getPokemonByName,
     getAllTypes,
+    getPokemonsByType,
     createPokemon
 } = require('../controllers/allcontrollers');
 
@@ -30,6 +31,9 @@ router.get('/pokemons/id/:idPokemon', validateId, getPokemonById);
 
 // Ruta para obtener todos los tipos de Pokemons
 router.get('/types', getAllTypes);
+
+// Ruta para obtener pokemones por tipo
+router.get('/pokemons/type/:typeName', getPokemonsByType);
 
 // Ruta para crear un nuevo Pokemon
 router.post('/pokemons', validatePokemonData, createPokemon);
