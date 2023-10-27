@@ -23,10 +23,10 @@ const router = Router();
 router.get('/pokemons', validateSource, getAllPokemons);
 
 // Ruta para obtener un Pokemon específico por nombre
-router.get('/pokemons/:name', validateName, getPokemonByName);
+router.get('/pokemons/name/:name', validateName, getPokemonByName);
 
 // Ruta para obtener un Pokemon específico por ID
-router.get('/pokemons/:idPokemon', validateId, getPokemonById);
+router.get('/pokemons/id/:idPokemon', validateId, getPokemonById);
 
 // Ruta para obtener todos los tipos de Pokemons
 router.get('/types', getAllTypes);
@@ -35,3 +35,4 @@ router.get('/types', getAllTypes);
 router.post('/pokemons', validatePokemonData, createPokemon);
 
 module.exports = router;
+
