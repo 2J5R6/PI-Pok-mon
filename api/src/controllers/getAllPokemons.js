@@ -1,82 +1,61 @@
-const { Pokemon, Type } = require('../db.js');
+const { Pokemon, Type } = require('../db');
 const axios = require('axios');
 
-module.exports = async (req, res, next) => {
-  try {
+const getAllPokemons = async (req, res, next) => {
     const { source } = req.query;
 
-    if (source === 'db') {
-      let pokemons = await Pokemon.findAll({
-        attributes: ['id', 'name', 'image', 'hp', 'attack', 'defense', 'speed', 'height', 'weight'],
-        include: {
-          model: Type,
-          attributes: ['name'],
-          through: {
-            attributes: [],
-          },
-        },
-      });
+    try {
+        if (source === 'db') {
+            const dbPokemons = await Pokemon.findAll({
+                include: Type,
+                attributes: ['id', 'name', 'image', 'hp', 'attack', 'defense', 'speed', 'height', 'weight']
+            });
 
-      if (pokemons.length === 0) {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100');
-        const pokemonList = response.data.results;
+            // Si no hay Pokémon en la base de datos, obtenemos los primeros 100 de la API y los guardamos en la base de datos.
+            if (dbPokemons.length === 0) {
+                const apiPokemons = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100');
+                const pokemonData = await Promise.all(apiPokemons.data.results.map(pokemon => axios.get(pokemon.url)));
+                
+                const pokemonsToSave = pokemonData.map(pokemon => ({
+                    id: pokemon.data.id,
+                    name: pokemon.data.name,
+                    image: pokemon.data.sprites.front_default,
+                    hp: pokemon.data.stats[0].base_stat,
+                    attack: pokemon.data.stats[1].base_stat,
+                    defense: pokemon.data.stats[2].base_stat,
+                    speed: pokemon.data.stats[5].base_stat,
+                    height: pokemon.data.height,
+                    weight: pokemon.data.weight
+                }));
 
-        const detailedPokemons = await Promise.all(pokemonList.map(async (pokemon) => {
-          const detailedResponse = await axios.get(pokemon.url);
-          return {
-            id: detailedResponse.data.id,
-            name: detailedResponse.data.name,
-            image: detailedResponse.data.sprites.front_default,
-            hp: detailedResponse.data.stats[0].base_stat,
-            attack: detailedResponse.data.stats[1].base_stat,
-            defense: detailedResponse.data.stats[2].base_stat,
-            speed: detailedResponse.data.stats[5].base_stat,
-            height: detailedResponse.data.height,
-            weight: detailedResponse.data.weight,
-            types: detailedResponse.data.types.map(type => type.type.name),
-          };
-        }));
+                await Pokemon.bulkCreate(pokemonsToSave);
+                return res.json(pokemonsToSave);
+            }
 
-        for (let pokemon of detailedPokemons) {
-          await Pokemon.create(pokemon);
+            return res.json(dbPokemons);
+        } else if (source === 'api') {
+            const apiPokemons = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000');
+            const pokemonData = await Promise.all(apiPokemons.data.results.map(pokemon => axios.get(pokemon.url)));
+            
+            const pokemonsToReturn = pokemonData.map(pokemon => ({
+                id: pokemon.data.id,
+                name: pokemon.data.name,
+                image: pokemon.data.sprites.front_default,
+                hp: pokemon.data.stats[0].base_stat,
+                attack: pokemon.data.stats[1].base_stat,
+                defense: pokemon.data.stats[2].base_stat,
+                speed: pokemon.data.stats[5].base_stat,
+                height: pokemon.data.height,
+                weight: pokemon.data.weight
+            }));
+
+            return res.json(pokemonsToReturn);
+        } else {
+            return res.status(400).json({ message: "La fuente proporcionada no es válida." });
         }
-
-        pokemons = detailedPokemons;
-      }
-
-      const formattedPokemons = pokemons.map(pokemon => {
-        return {
-          ...pokemon.dataValues,
-          types: pokemon.dataValues.types.map(type => type.name)
-        };
-      });
-
-      return res.status(200).send(formattedPokemons);
-    } else if (source === 'api') {
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100');
-      const pokemonList = response.data.results;
-
-      const detailedPokemons = await Promise.all(pokemonList.map(async (pokemon) => {
-        const detailedResponse = await axios.get(pokemon.url);
-        return {
-          id: detailedResponse.data.id,
-          name: detailedResponse.data.name,
-          image: detailedResponse.data.sprites.front_default,
-          hp: detailedResponse.data.stats[0].base_stat,
-          attack: detailedResponse.data.stats[1].base_stat,
-          defense: detailedResponse.data.stats[2].base_stat,
-          speed: detailedResponse.data.stats[5].base_stat,
-          height: detailedResponse.data.height,
-          weight: detailedResponse.data.weight,
-          types: detailedResponse.data.types.map(type => type.type.name),
-        };
-      }));
-
-      return res.status(200).send(detailedPokemons);
-    } else {
-      return res.status(400).send({ message: 'Fuente no especificada o no válida.' });
+    } catch (error) {
+        next(error);
     }
-  } catch (error) {
-    next(error);
-  }
 };
+
+module.exports = getAllPokemons;
