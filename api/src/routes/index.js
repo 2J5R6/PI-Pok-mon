@@ -1,14 +1,15 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+
+// Importación de controladores
 const {
     getAllPokemons,
     getPokemonById,
     getPokemonByName,
     getAllTypes,
     createPokemon
-    } = require('../controllers/allcontrollers');
+} = require('../controllers/allcontrollers');
 
+// Importación de middlewares de validación
 const validateSource = require('../middlewares/validateSource');
 const validateId = require('../middlewares/validateId.js');
 const validateName = require('../middlewares/validateName.js');
@@ -16,20 +17,21 @@ const validatePokemonData = require('../middlewares/validatePokemonData.js');
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+// Rutas para obtener información de Pokemons y Types
 
+// Ruta para obtener todos los Pokemons
 router.get('/pokemons', validateSource, getAllPokemons);
+
+// Ruta para obtener un Pokemon específico por nombre
+router.get('/pokemons/:name', validateName, getPokemonByName);
+
+// Ruta para obtener un Pokemon específico por ID
 router.get('/pokemons/:idPokemon', validateId, getPokemonById);
-router.get('/pokemons/name', validateName, getPokemonByName);
+
+// Ruta para obtener todos los tipos de Pokemons
 router.get('/types', getAllTypes);
+
+// Ruta para crear un nuevo Pokemon
 router.post('/pokemons', validatePokemonData, createPokemon);
-
-
-
-
-
-
-
 
 module.exports = router;
