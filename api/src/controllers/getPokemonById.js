@@ -17,7 +17,9 @@ const getPokemonById = async (req, res, next) => {
             }
 
             return res.json(dbPokemon);
-        } else if (source === 'api') {
+        } 
+
+        if (source === 'api') {
             const apiPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
 
             if (!apiPokemon.data) {
@@ -37,9 +39,10 @@ const getPokemonById = async (req, res, next) => {
             };
 
             return res.json(pokemonToReturn);
-        } else {
-            return res.status(400).json({ message: "La fuente proporcionada no es válida." });
-        }
+        } 
+
+        return res.status(400).json({ message: "La fuente proporcionada no es válida." });
+        
     } catch (error) {
         if (error.response && error.response.status === 404) {
             return res.status(404).json({ message: "No se encontró el Pokémon." });
@@ -49,4 +52,3 @@ const getPokemonById = async (req, res, next) => {
 };
 
 module.exports = getPokemonById;
-
