@@ -2,7 +2,7 @@ const { Pokemon, Type } = require('../db');
 const axios = require('axios');
 
 const getPokemonByName = async (req, res, next) => {
-    const { name } = req.query;
+    const { name } = req.params;
     const { source } = req.query;
 
     try {

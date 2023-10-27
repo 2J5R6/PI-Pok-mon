@@ -28,7 +28,16 @@ const getAllPokemons = async (req, res, next) => {
                     weight: pokemon.data.weight
                 }));
 
-                await Pokemon.bulkCreate(pokemonsToSave);
+                // Guardamos los Pokemons en la base de datos
+                const savedPokemons = await Pokemon.bulkCreate(pokemonsToSave);
+
+                // Establecemos la relación entre los Pokemons y sus tipos
+                for (let i = 0; i < savedPokemons.length; i++) {
+                    const types = pokemonData[i].data.types.map(type => type.type.name);
+                    const typesInDb = await Type.findAll({ where: { name: types } });
+                    await savedPokemons[i].setTypes(typesInDb);
+                }
+
                 return res.json(pokemonsToSave);
             }
 

@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-    const { name } = req.query;
+    const { name } = req.params;
   
     if (!name || typeof name !== 'string') {
       

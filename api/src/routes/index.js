@@ -17,7 +17,7 @@ const validatePokemonData = require('../middlewares/validatePokemonData.js');
 
 const router = Router();
 
-// Rutas para obtener información de Pokemons y Types
+//* Rutas para obtener información de Pokemons y Types
 
 // Ruta para obtener todos los Pokemons
 router.get('/pokemons', validateSource, getAllPokemons);
