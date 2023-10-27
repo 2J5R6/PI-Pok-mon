@@ -4,9 +4,11 @@ module.exports = (sequelize) => {
   sequelize.define('type', {
     // ID del Tipo
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      unique: true,
+      autoIncrement: true 
     },
 
     // Nombre del Tipo
