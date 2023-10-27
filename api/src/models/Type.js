@@ -23,5 +23,5 @@ module.exports = (sequelize) => {
         fields: ['name']
       }
     ]
-  });
+  }, { timestamps: false });
 };
