@@ -4,8 +4,13 @@ module.exports = async (req, res, next) => {
   try {
     const { name, image, life, attack, defense, speed, height, weight, types } = req.body;
 
+    // Obtener el ID más grande en la base de datos y agregar 1 para generar un ID único
+    const maxId = await Pokemon.max('id');
+    const newId = maxId > 100 ? maxId + 1 : 101;
+
     // Creamos el Pokémon en la base de datos
     const newPokemon = await Pokemon.create({
+      id: newId,
       name,
       image,
       life,
