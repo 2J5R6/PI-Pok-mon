@@ -34,7 +34,10 @@ const getAllPokemons = async (req, res, next) => {
                 // Establecemos la relación entre los Pokemons y sus tipos
                 for (let i = 0; i < savedPokemons.length; i++) {
                     const types = pokemonData[i].data.types.map(type => type.type.name);
-                    const typesInDb = await Type.findAll({ where: { name: types } });
+                    const typesInDb = await Promise.all(types.map(async typeName => {
+                        const [typeObj] = await Type.findOrCreate({ where: { name: typeName } });
+                        return typeObj;
+                    }));
                     await savedPokemons[i].setTypes(typesInDb);
                 }
 
