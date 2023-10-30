@@ -19,7 +19,7 @@ const HomePage = () => {
           <div key={pokemon.id} className={styles.pokemonCard}>
             <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
             <h2 className={styles.pokemonName}>{pokemon.name}</h2>
-            <p className={styles.pokemonType}>{Array.isArray(pokemon.type) ? pokemon.type.join(', ') : ''}</p>
+            <p className={styles.pokemonType}>{Array.isArray(pokemon.types) ? pokemon.types.join(', ') : ''}</p>
           </div>
         ))}
       </div>
