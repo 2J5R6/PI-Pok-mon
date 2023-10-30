@@ -15,7 +15,7 @@ const HomePage = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Pokédex</h1>
       <div className={styles.pokemonList}>
-        {pokemons.map(pokemon => (
+        {pokemons &&pokemons.map(pokemon => (
           <div key={pokemon.id} className={styles.pokemonCard}>
             <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
             <h2 className={styles.pokemonName}>{pokemon.name}</h2>
