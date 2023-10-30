@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f2f2f2; /* Fondo claro */
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #3b4cca; /* Azul Pokémon */
+  margin-bottom: 1rem;
+}
+
+.pokemonList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.pokemonCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid #3b4cca; /* Borde azul Pokémon */
+  border-radius: 15px;
+  background-color: #ffffff; /* Fondo blanco */
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.pokemonImage {
+  width: 100px;
+  height: 100px;
+}
+
+.pokemonName {
+  font-size: 1.5rem;
+  color: #3b4cca; /* Azul Pokémon */
+  margin-top: 0.5rem;
+}
+
+.pokemonType {
+  font-size: 1rem;
+  color: #ffcb05; /* Amarillo Pikachu */
+  margin-top: 0.5rem;
+}
