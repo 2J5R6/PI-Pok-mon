@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons } from '../../redux/actions/pokemonActions';
 import styles from './HomePage.module.css';
+import Navbar from '../../components/Navbar/Navbar'; // Importa el componente Navbar
+import SearchBar from '../../components/SearchBar/SearchBar'; // Importa el componente SearchBar
+import Cards from '../../components/Cards/Cards'; // Importa el componente Cards
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -13,16 +16,10 @@ const HomePage = () => {
 
   return (
     <div className={styles.container}>
+      <Navbar /> {/* Utiliza el componente Navbar */}
+      <SearchBar /> {/* Utiliza el componente SearchBar */}
       <h1 className={styles.title}>Pokédex</h1>
-      <div className={styles.pokemonList}>
-        {Array.isArray(pokemons) && pokemons.map(pokemon => (
-          <div key={pokemon.id} className={styles.pokemonCard}>
-            <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
-            <h2 className={styles.pokemonName}>{pokemon.name}</h2>
-            <p className={styles.pokemonType}>{Array.isArray(pokemon.types) ? pokemon.types.join(', ') : ''}</p>
-          </div>
-        ))}
-      </div>
+      <Cards pokemons={pokemons} /> {/* Utiliza el componente Cards y pasa los pokemons como prop */}
     </div>
   );
 };
