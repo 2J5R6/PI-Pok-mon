@@ -8,13 +8,8 @@ const HomePage = () => {
   const pokemons = useSelector(state => state.pokemons);
 
   useEffect(() => {
-    dispatch(getAllPokemons())
-    .then(() => setLoading(false));
+    dispatch(getAllPokemons());
   }, [dispatch]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className={styles.container}>
