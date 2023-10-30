@@ -15,11 +15,11 @@ const HomePage = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Pokédex</h1>
       <div className={styles.pokemonList}>
-        {pokemons &&pokemons.map(pokemon => (
+        {Array.isArray(pokemons) && pokemons.map(pokemon => (
           <div key={pokemon.id} className={styles.pokemonCard}>
             <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
             <h2 className={styles.pokemonName}>{pokemon.name}</h2>
-            <p className={styles.pokemonType}>{pokemon.type.join(', ')}</p>
+            <p className={styles.pokemonType}>{Array.isArray(pokemon.type) ? pokemon.type.join(', ') : ''}</p>
           </div>
         ))}
       </div>
