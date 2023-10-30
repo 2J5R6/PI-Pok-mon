@@ -9,7 +9,7 @@ export const CREATE_POKEMON = 'CREATE_POKEMON';
 
 const API_URL = 'http://localhost:3001';
 
-export function getAllPokemons(source = 'api') {
+export function getAllPokemons(source = 'db') {
   return function(dispatch) {
     return axios.get(`${API_URL}/pokemons?source=${source}`)
       .then(response => {
@@ -18,7 +18,7 @@ export function getAllPokemons(source = 'api') {
   };
 }
 
-export function getPokemonDetail(id, source = 'api') {
+export function getPokemonDetail(id, source = 'db') {
   return function(dispatch) {
     return axios.get(`${API_URL}/pokemons/id/${id}?source=${source}`)
       .then(response => {
@@ -27,7 +27,7 @@ export function getPokemonDetail(id, source = 'api') {
   };
 }
 
-export function searchPokemon(name, source = 'api') {
+export function searchPokemon(name, source = 'db') {
   return function(dispatch) {
     return axios.get(`${API_URL}/pokemons/name/${name}?source=${source}`)
       .then(response => {
@@ -45,7 +45,7 @@ export function getPokemonTypes() {
   };
 }
 
-export function filterPokemonsByType(typeName, source = 'api') {
+export function filterPokemonsByType(typeName, source = 'db') {
   return function(dispatch) {
     return axios.get(`${API_URL}/pokemons/type/${typeName}?source=${source}`)
       .then(response => {
