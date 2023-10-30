@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPokemons } from '../redux/actions/pokemonActions';
+import { getAllPokemons } from '../../redux/actions/pokemonActions';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
   const pokemons = useSelector(state => state.pokemons);
 
   useEffect(() => {
-    dispatch(fetchPokemons());
+    dispatch(getAllPokemons());
   }, [dispatch]);
 
   return (

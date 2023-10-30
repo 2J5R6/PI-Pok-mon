@@ -5,7 +5,7 @@ import LandingPage from './views/LandingPage/LandingPage';
 import HomePage from './views/HomePage/HomePage';
 import DetailPage from './views/DetailPage/DetailPage';
 import FormPage from './views/FormPage/FormPage';
-import './App.module.css';
+import './App.css';
 
 function App() {
   return (
