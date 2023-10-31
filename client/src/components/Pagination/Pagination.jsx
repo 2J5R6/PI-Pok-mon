@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPage } from '../../redux/actions/pokemonActions';
+import { setCurrentPage } from '../../redux/actions/pokemonActions';
 import styles from './Pagination.module.css';
 
 const Pagination = () => {
@@ -10,13 +10,13 @@ const Pagination = () => {
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      dispatch(setPage(currentPage - 1));
+      dispatch(setCurrentPage(currentPage - 1));
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      dispatch(setPage(currentPage + 1));
+      dispatch(setCurrentPage(currentPage + 1));
     }
   };
 

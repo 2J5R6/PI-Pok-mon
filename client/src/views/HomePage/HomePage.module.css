@@ -1,9 +1,14 @@
 .container {
+  background-image: url('../../assets/images/Pokémon-Journey.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #f2f2f2; /* Fondo claro */
+  /* background-color: #f2f2f2; Fondo claro */
 }
 
 .title {
