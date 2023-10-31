@@ -6,6 +6,7 @@ export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
 export const FILTER_POKEMONS_BY_TYPE = 'FILTER_POKEMONS_BY_TYPE';
 export const CREATE_POKEMON = 'CREATE_POKEMON';
+export const ORDER_POKEMONS = 'ORDER_POKEMONS';
 
 const API_URL = 'http://localhost:3001';
 
@@ -61,4 +62,8 @@ export function createPokemon(pokemonData) {
         dispatch({ type: CREATE_POKEMON, payload: response.data });
       });
   };
+}
+
+export function orderBy(orderType) {
+  return { type: ORDER_POKEMONS, payload: orderType };
 }
