@@ -39,10 +39,15 @@ export const toggleFavorite = (pokemonId) => ({
   payload: pokemonId
 });
 
-export const getPokemonByNameOrId = (nameOrId) => async (dispatch) => {
+export const getPokemonByNameOrId = (query, type) => async (dispatch) => {
   dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_REQUEST });
   try {
-    const response = await axios.get(`${BASE_URL}/${nameOrId}`);
+    let response;
+    if (type === "id") {
+      response = await axios.get(`${BASE_URL}/id/${query}?source=db`);
+    } else if (type === "name") {
+      response = await axios.get(`${BASE_URL}/name/${query}?source=db`);
+    }
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS, payload: response.data });
   } catch (error) {
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_FAILURE, payload: error.message });
