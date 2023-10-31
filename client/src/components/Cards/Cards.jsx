@@ -6,13 +6,19 @@ import styles from './Cards.module.css';
 const Cards = () => {
   const pokemons = useSelector(state => state.pokemons);
 
+  if (!pokemons.length) {
+    return <p className={styles.errorMessage}>No se encontraron pokemons. Por favor, intenta nuevamente.</p>;
+  }
+
   return (
     <div className={styles.cardsContainer}>
       {pokemons.map(pokemon => (
-        <Card key={pokemon.id} pokemon={pokemon} />
+        <MemoizedCard key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>
   );
 };
+
+const MemoizedCard = React.memo(Card);
 
 export default Cards;
