@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { filterByType, orderBy } from '../../redux/actions/pokemonActions'; // Importamos las acciones correspondientes
 import styles from './Filter.module.css';
 
 const Filters = () => {
@@ -9,12 +10,12 @@ const Filters = () => {
 
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
-    // Aquí iría la acción para filtrar por tipo
+    dispatch(filterByType(e.target.value)); // Despachamos la acción para filtrar por tipo
   };
 
   const handleOrderChange = (e) => {
     setOrder(e.target.value);
-    // Aquí iría la acción para ordenar
+    dispatch(orderBy(e.target.value)); // Despachamos la acción para ordenar
   };
 
   return (
