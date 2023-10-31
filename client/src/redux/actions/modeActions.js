@@ -1,5 +1,6 @@
-export const TOGGLE_MODE = 'TOGGLE_MODE';
+import { SET_MODE } from './actionTypes';
 
-export function toggleMode() {
-  return { type: TOGGLE_MODE };
-}
+export const setMode = (mode) => ({
+  type: SET_MODE,
+  payload: mode,
+});

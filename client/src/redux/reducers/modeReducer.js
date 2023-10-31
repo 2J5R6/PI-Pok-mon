@@ -1,19 +1,20 @@
-import { TOGGLE_MODE } from '../actions/modeActions';
+// modeReducer.js
+import { SET_MODE } from '../actions/actionTypes';
 
 const initialState = {
-  darkMode: false
+  mode: 'api', // Default mode is set to 'api'
 };
 
-function modeReducer(state = initialState, action) {
+const modeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_MODE:
+    case SET_MODE:
       return {
         ...state,
-        darkMode: !state.darkMode
+        mode: action.payload,
       };
     default:
       return state;
   }
-}
+};
 
 export default modeReducer;

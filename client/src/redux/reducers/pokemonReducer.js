@@ -1,70 +1,52 @@
+// pokemonReducer.js
 import {
-    GET_POKEMONS,
-    GET_POKEMON_DETAIL,
-    SEARCH_POKEMON,
-    GET_POKEMON_TYPES,
-    FILTER_POKEMONS_BY_TYPE,
-    CREATE_POKEMON,
-    ORDER_POKEMONS,
-    SET_CURRENT_PAGE
-  } from '../actions/pokemonActions';
+    FETCH_POKEMONS_REQUEST,
+    FETCH_POKEMONS_SUCCESS,
+    FETCH_POKEMONS_FAILURE,
+    CREATE_POKEMON_REQUEST,
+    CREATE_POKEMON_SUCCESS,
+    CREATE_POKEMON_FAILURE,
+  } from '../actions/actionTypes';
   
   const initialState = {
+    loading: false,
     pokemons: [],
-    pokemonDetail: {},
-    pokemonTypes: [],
-    searchedPokemon: [],
-    createdPokemon: {},
-    currentPage: 1,
-    totalPages: 0
+    error: '',
   };
   
-  function pokemonReducer(state = initialState, action) {
+  const pokemonReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_POKEMONS:
-            return {
-                ...state,
-                pokemons: Array.isArray(action.payload) ? action.payload : []
-            };
-        case GET_POKEMON_DETAIL:
-            return {
-                ...state,
-                pokemonDetail: action.payload || {}
-            };
-        case SEARCH_POKEMON:
-            return {
-                ...state,
-                searchedPokemon: Array.isArray(action.payload) ? action.payload : []
-            };
-        case GET_POKEMON_TYPES:
-            return {
-                ...state,
-                pokemonTypes: Array.isArray(action.payload) ? action.payload : []
-            };
-        case FILTER_POKEMONS_BY_TYPE:
-            return {
-                ...state,
-                pokemons: Array.isArray(action.payload) ? action.payload : []
-            };
-        case CREATE_POKEMON:
-            return {
-                ...state,
-                createdPokemon: action.payload || {}
-            };
-        case ORDER_POKEMONS:
-            return {
-                ...state,
-                pokemons: Array.isArray(action.payload) ? action.payload : []
-            };
-        case SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.payload
-              };
-        default:
-            return state;
+      case FETCH_POKEMONS_REQUEST:
+      case CREATE_POKEMON_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case FETCH_POKEMONS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          pokemons: action.payload,
+          error: '',
+        };
+      case FETCH_POKEMONS_FAILURE:
+      case CREATE_POKEMON_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case CREATE_POKEMON_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          pokemons: [...state.pokemons, action.payload],
+          error: '',
+        };
+      default:
+        return state;
     }
-  }
+  };
   
   export default pokemonReducer;
   

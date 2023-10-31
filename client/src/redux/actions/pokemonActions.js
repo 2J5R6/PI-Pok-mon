@@ -1,76 +1,78 @@
+// pokemonActions.js
 import axios from 'axios';
+import {
+  FETCH_POKEMONS_REQUEST,
+  FETCH_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_FAILURE,
+  CREATE_POKEMON_REQUEST,
+  CREATE_POKEMON_SUCCESS,
+  CREATE_POKEMON_FAILURE,
+} from './actionTypes';
 
-export const GET_POKEMONS = 'GET_POKEMONS';
-export const GET_POKEMON_DETAIL = 'GET_POKEMON_DETAIL';
-export const SEARCH_POKEMON = 'SEARCH_POKEMON';
-export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
-export const FILTER_POKEMONS_BY_TYPE = 'FILTER_POKEMONS_BY_TYPE';
-export const CREATE_POKEMON = 'CREATE_POKEMON';
-export const ORDER_POKEMONS = 'ORDER_POKEMONS';
-export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-
-const API_URL = 'http://localhost:3001';
-
-export function getAllPokemons(source = 'db') {
-  return function(dispatch) {
-    return axios.get(`${API_URL}/pokemons?source=${source}`)
-      .then(response => {
-        dispatch({ type: GET_POKEMONS, payload: response.data });
+export const fetchPokemons = () => {
+  return (dispatch) => {
+    dispatch(fetchPokemonsRequest());
+    axios
+      .get('/pokemons')
+      .then((response) => {
+        dispatch(fetchPokemonsSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchPokemonsFailure(error.message));
       });
   };
-}
+};
 
-export function getPokemonDetail(id, source = 'db') {
-  return function(dispatch) {
-    return axios.get(`${API_URL}/pokemons/id/${id}?source=${source}`)
-      .then(response => {
-        dispatch({ type: GET_POKEMON_DETAIL, payload: response.data });
+const fetchPokemonsRequest = () => {
+  return {
+    type: FETCH_POKEMONS_REQUEST,
+  };
+};
+
+const fetchPokemonsSuccess = (pokemons) => {
+  return {
+    type: FETCH_POKEMONS_SUCCESS,
+    payload: pokemons,
+  };
+};
+
+const fetchPokemonsFailure = (error) => {
+  return {
+    type: FETCH_POKEMONS_FAILURE,
+    payload: error,
+  };
+};
+
+export const createPokemon = (pokemonData) => {
+  return (dispatch) => {
+    dispatch(createPokemonRequest());
+    axios
+      .post('/pokemons', pokemonData)
+      .then((response) => {
+        dispatch(createPokemonSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(createPokemonFailure(error.message));
       });
   };
-}
+};
 
-export function searchPokemon(name, source = 'db') {
-  return function(dispatch) {
-    return axios.get(`${API_URL}/pokemons/name/${name}?source=${source}`)
-      .then(response => {
-        dispatch({ type: SEARCH_POKEMON, payload: response.data });
-      });
+const createPokemonRequest = () => {
+  return {
+    type: CREATE_POKEMON_REQUEST,
   };
-}
+};
 
-export function getPokemonTypes() {
-  return function(dispatch) {
-    return axios.get(`${API_URL}/types`)
-      .then(response => {
-        dispatch({ type: GET_POKEMON_TYPES, payload: response.data });
-      });
+const createPokemonSuccess = (pokemon) => {
+  return {
+    type: CREATE_POKEMON_SUCCESS,
+    payload: pokemon,
   };
-}
+};
 
-export function filterPokemonsByType(typeName, source = 'db') {
-  return function(dispatch) {
-    return axios.get(`${API_URL}/pokemons/type/${typeName}?source=${source}`)
-      .then(response => {
-        dispatch({ type: FILTER_POKEMONS_BY_TYPE, payload: response.data });
-      });
+const createPokemonFailure = (error) => {
+  return {
+    type: CREATE_POKEMON_FAILURE,
+    payload: error,
   };
-}
-
-export function createPokemon(pokemonData) {
-  return function(dispatch) {
-    return axios.post(`${API_URL}/pokemons`, pokemonData)
-      .then(response => {
-        dispatch({ type: CREATE_POKEMON, payload: response.data });
-      });
-  };
-}
-
-export function orderBy(orderType) {
-  return { type: ORDER_POKEMONS, payload: orderType };
-}
-
-export const setCurrentPage = (page) => ({
-  type: SET_CURRENT_PAGE,
-  payload: page
-});
-
+};
