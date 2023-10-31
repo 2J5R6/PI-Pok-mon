@@ -44,8 +44,6 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
   }
 };
 
-export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
-
 export const toggleFavorite = (pokemonId) => ({
   type: TOGGLE_FAVORITE,
   payload: pokemonId
