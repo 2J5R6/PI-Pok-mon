@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPokemons } from '../../redux/actions/pokemonActions';
-import Card from './Card';
+import Card from '../Card/Card';
 import './Cards.module.css';
 
 const Cards = () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import NavBar from '../NavBar/NavBar';
-import SearchBar from '../SearchBar/SearchBar';
-import Cards from '../Cards/Cards';
-import Filters from '../Filters/Filters';
+import NavBar from '../../components/NavBar/NavBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Cards from '../../components/Cards/Cards';
+import Filters from '../../components/Filters/Filters';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
