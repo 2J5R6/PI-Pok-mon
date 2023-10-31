@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
+import NavBar from '../src/components/NavBar/NavBar';
 import LandingPage from './views/LandingPage/LandingPage';
 import HomePage from './views/HomePage/HomePage';
 // import DetailPage from './views/DetailPage/DetailPage';
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/*" element={<Navbar />} />
+        <Route path="/*" element={<NavBar />} />
         <Route path="/home" element={<HomePage />} />
         {/* <Route path="/pokemon/:id" element={<DetailPage />} /> */}
         {/* <Route path="/create" element={<FormPage />} /> */}
