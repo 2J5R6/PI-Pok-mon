@@ -13,7 +13,9 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      dispatch(getPokemonByNameOrId(searchTerm));
+      // Determinar si el término de búsqueda es un número (ID) o una cadena de texto (nombre)
+      const searchType = isNaN(searchTerm) ? "name" : "id";
+      dispatch(getPokemonByNameOrId(searchTerm, searchType));
     }
   };
 
