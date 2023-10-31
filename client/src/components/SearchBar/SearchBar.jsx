@@ -23,7 +23,7 @@ const SearchBar = () => {
       <form onSubmit={handleSearch} className={styles.searchForm}>
         <input
           type="text"
-          placeholder="Buscar Pokemon..."
+          placeholder="Buscar Pokemon por nombre o ID..."
           value={searchTerm}
           onChange={handleInputChange}
           className={styles.searchInput}
