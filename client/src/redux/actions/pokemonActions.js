@@ -5,6 +5,7 @@ import {
   FETCH_POKEMONS_FAILURE,
   CREATE_POKEMON_SUCCESS,
   CREATE_POKEMON_FAILURE,
+  TOGGLE_FAVORITE
 } from './actionTypes';
 
 const BASE_URL = 'http://localhost:3001/pokemons';
@@ -27,3 +28,11 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
     dispatch({ type: CREATE_POKEMON_FAILURE, payload: error.message });
   }
 };
+
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
+
+export const toggleFavorite = (pokemonId) => ({
+  type: TOGGLE_FAVORITE,
+  payload: pokemonId
+});
+

@@ -1,39 +1,33 @@
 .cardContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #3b4cca;
-    border-radius: 15px;
-    padding: 1rem;
-    margin: 1rem;
-    transition: transform 0.3s ease;
-  
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-  
-  .pokemonImage {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .pokemonName {
-    font-size: 1.2rem;
-    color: #3b4cca;
-    margin-top: 0.5rem;
-  }
-  
-  .pokemonTypes {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .type {
-    padding: 0.2rem 0.5rem;
-    border-radius: 10px;
-    background-color: #ffcb05;
-    color: #3b4cca;
-  }
-  
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.pokemonImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.pokemonInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detailsLink {
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007BFF;
+  cursor: pointer;
+}
+
+.detailsLink:hover {
+  text-decoration: underline;
+}
