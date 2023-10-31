@@ -1,27 +1,15 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import ModeToggle from '../ModeToggle/ModeToggle';
-import './Navbar.module.css';
+import { Link } from 'react-router-dom';
+import './NavBar.module.css';
 
-function Navbar() {
-  const location = useLocation();
-
+const NavBar = () => {
   return (
-    <nav className="navbar">
-      <div className="nav-links">
-        <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
-          Inicio
-        </Link>
-        <Link to="/home" className={location.pathname === '/home' ? 'active' : ''}>
-          Explorar Pokémons
-        </Link>
-        <Link to="/create" className={location.pathname === '/create' ? 'active' : ''}>
-          Crear Pokémon
-        </Link>
-      </div>
-      <ModeToggle />
+    <nav className="navBar">
+      <Link to="/" className="navLink">Home</Link>
+      <Link to="/favorites" className="navLink">Favorites</Link>
+      <Link to="/create" className="navLink">Create Pokémon</Link>
     </nav>
   );
-}
+};
 
-export default Navbar;
+export default NavBar;

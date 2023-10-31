@@ -1,44 +1,19 @@
-.navbar {
+.navBar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: var(--bg-color);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.navbar a {
+.navLink {
   text-decoration: none;
-  color: var(--text-color);
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  font-weight: bold;
-  background: linear-gradient(145deg, #f5f5f5, #e1e1e1);
-  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-}
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 
-.navbar a.active,
-.navbar a:hover {
-  background-color: var(--highlight-color);
-  transform: scale(1.05);
-}
-
-/* Estilos para el modo oscuro */
-:root[data-theme='dark'] {
-  --bg-color: #2c3e50;
-  --text-color: #ecf0f1;
-  --highlight-color: #e74c3c;
-}
-
-/* Estilos para el modo claro */
-:root[data-theme='light'] {
-  --bg-color: #ecf0f1;
-  --text-color: #2c3e50;
-  --highlight-color: #3498db;
+  &:hover {
+    background-color: #e6e6e6;
+  }
 }
