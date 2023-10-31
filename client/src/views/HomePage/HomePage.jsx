@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons } from '../../redux/actions/pokemonActions';
-import styles from './HomePage.module.css';
-import Navbar from '../../components/Navbar/Navbar';
+import { fetchPokemons } from '../../redux/actions/pokemonActions';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import Cards from '../../components/Cards/Cards';
+import Filters from '../../components/Filters/Filters';
+import Card from '../../components/Card/Card';
+import styles from './HomePage.module.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemons);
+  const { pokemons, isLoading, error } = useSelector(state => state.pokemon);
 
   useEffect(() => {
-    dispatch(getAllPokemons());
+    dispatch(fetchPokemons());
   }, [dispatch]);
 
   return (
-    <div className={styles.container}>
-      <Navbar />
+    <div className={styles.homePageContainer}>
       <SearchBar />
-      <h1 className={styles.title}>Pokédex</h1>
-      <Cards pokemons={pokemons} />
+      <Filters />
+      {isLoading && <p>Cargando...</p>}
+      {error && <p>Error: {error}</p>}
+      <div className={styles.cardsContainer}>
+        {pokemons.map(pokemon => (
+          <Card key={pokemon.id} pokemon={pokemon} />
+        ))}
+      </div>
     </div>
   );
 };
