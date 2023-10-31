@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { searchPokemon } from '../../redux/actions/pokemonActions';
 import styles from './SearchBar.module.css';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (searchTerm) {
-      dispatch(searchPokemon(searchTerm));
+      const result = await dispatch(searchPokemon(searchTerm));
+      if (result) {
+        navigate(`/pokemon/${result.id}`);
+      } else {
+        alert('Pokémon no encontrado.');
+      }
     }
   };
 
