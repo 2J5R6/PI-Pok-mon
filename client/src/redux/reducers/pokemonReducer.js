@@ -5,6 +5,9 @@ import {
   CREATE_POKEMON_SUCCESS,
   CREATE_POKEMON_FAILURE,
   TOGGLE_FAVORITE,
+  FETCH_POKEMON_BY_NAME_OR_ID_REQUEST,
+  FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS,
+  FETCH_POKEMON_BY_NAME_OR_ID_FAILURE
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -13,6 +16,7 @@ const initialState = {
   error: null,
   createdPokemon: null,
   favorites: [],
+  selectedPokemon: null
 };
 
 const pokemonReducer = (state = initialState, action) => {
@@ -35,6 +39,12 @@ const pokemonReducer = (state = initialState, action) => {
           ? state.favorites.filter(id => id !== action.payload)
           : [...state.favorites, action.payload]
       };
+    case FETCH_POKEMON_BY_NAME_OR_ID_REQUEST:
+      return { ...state, isLoading: true, error: null, selectedPokemon: null };
+    case FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS:
+      return { ...state, isLoading: false, selectedPokemon: action.payload };
+    case FETCH_POKEMON_BY_NAME_OR_ID_FAILURE:
+      return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }

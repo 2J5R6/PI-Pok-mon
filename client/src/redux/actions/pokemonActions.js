@@ -5,7 +5,10 @@ import {
   FETCH_POKEMONS_FAILURE,
   CREATE_POKEMON_SUCCESS,
   CREATE_POKEMON_FAILURE,
-  TOGGLE_FAVORITE
+  TOGGLE_FAVORITE,
+  FETCH_POKEMON_BY_NAME_OR_ID_REQUEST,
+  FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS,
+  FETCH_POKEMON_BY_NAME_OR_ID_FAILURE
 } from './actionTypes';
 
 const BASE_URL = 'http://localhost:3001/pokemons';
@@ -35,4 +38,14 @@ export const toggleFavorite = (pokemonId) => ({
   type: TOGGLE_FAVORITE,
   payload: pokemonId
 });
+
+export const getPokemonByNameOrId = (nameOrId) => async (dispatch) => {
+  dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_REQUEST });
+  try {
+    const response = await axios.get(`${BASE_URL}/${nameOrId}`);
+    dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_FAILURE, payload: error.message });
+  }
+};
 
