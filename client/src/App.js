@@ -10,9 +10,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/*" element={<Navbar />} />
         <Route path="/home" element={<HomePage />} />
         {/* <Route path="/pokemon/:id" element={<DetailPage />} /> */}
         {/* <Route path="/create" element={<FormPage />} /> */}
