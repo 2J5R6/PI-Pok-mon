@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toggleFavorite } from '../redux/actions/pokemonActions'; // Asumiendo que tienes una acción llamada toggleFavorite en pokemonActions
+import { toggleFavorite } from '../../redux/actions/pokemonActions'; // Asumiendo que tienes una acción llamada toggleFavorite en pokemonActions
 import styles from './Card.module.css';
 
 const Card = ({ pokemon }) => {
