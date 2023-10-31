@@ -6,7 +6,7 @@ import styles from './NavBar.module.css';
 const NavBar = () => {
   return (
     <div className={styles.navBarContainer}>
-      <Link to="/" className={styles.navLink}>Home</Link>
+      <Link to="/Home" className={styles.navLink}>Home</Link>
       <Link to="/favorites" className={styles.navLink}>Favorites</Link>
       <Link to="/create" className={styles.navLink}>Create</Link>
     </div>
