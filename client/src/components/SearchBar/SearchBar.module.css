@@ -1,14 +1,20 @@
-.searchForm {
+.searchContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 30px 0;
+}
+
+.searchForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 2px solid #f2cb07; /* Amarillo Pikachu */
   border-radius: 30px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 300px;
+  width: 320px;
   padding: 5px;
 }
 
@@ -36,6 +42,7 @@
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .searchButton:hover {
