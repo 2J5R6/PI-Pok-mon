@@ -1,57 +1,29 @@
-.container {
-  background-image: url('../../assets/images/Pokemon-World.png');
+.homePageContainer {
+  background-image: url('path_to_your_background_image.jpg');
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
-  /* background-blend-mode: overlay; */
+  background-repeat: no-repeat;
   height: 100vh;
+  padding: 20px;
+}
+
+.contentArea {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
-.title {
-  font-size: 2.5rem;
-  color: #3b4cca;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.pokemonList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.pokemonCard {
+.cardsContainer {
+  width: 75%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  border: 2px solid #3b4cca;
-  border-radius: 15px;
-  background-color: #ffffff;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.pokemonImage {
-  width: 100px;
-  height: 100px;
-}
-
-.pokemonName {
-  font-size: 1.5rem;
-  color: #3b4cca;
-  margin-top: 0.5rem;
-}
-
-.pokemonType {
-  font-size: 1rem;
-  color: #ffcb05;
-  margin-top: 0.5rem;
+/* Estilos para el componente Filters */
+/* Puedes ajustar estos estilos según tus preferencias */
+.filtersContainer {
+  width: 20%;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 10px;
 }
