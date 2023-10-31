@@ -16,7 +16,8 @@ const initialState = {
   error: null,
   createdPokemon: null,
   favorites: [],
-  selectedPokemon: null
+  selectedPokemon: null,
+  dataSource: 'db'  // Fuente de datos por defecto
 };
 
 const pokemonReducer = (state = initialState, action) => {
@@ -45,6 +46,8 @@ const pokemonReducer = (state = initialState, action) => {
       return { ...state, isLoading: false, selectedPokemon: action.payload };
     case FETCH_POKEMON_BY_NAME_OR_ID_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
+    case SET_DATA_SOURCE:
+      return { ...state, dataSource: action.payload };
     default:
       return state;
   }

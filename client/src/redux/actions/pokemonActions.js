@@ -54,3 +54,18 @@ export const getPokemonByNameOrId = (query, type) => async (dispatch) => {
   }
 };
 
+export const filterPokemonsByType = (type, source = 'db') => async (dispatch) => {
+  dispatch({ type: FETCH_POKEMONS_REQUEST });
+  try {
+    const response = await axios.get(`${BASE_URL}/type/${type}?source=${source}`);
+    dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
+  }
+};
+
+// Acción para cambiar la fuente de datos
+export const setDataSource = (source) => ({
+  type: SET_DATA_SOURCE,
+  payload: source
+});
