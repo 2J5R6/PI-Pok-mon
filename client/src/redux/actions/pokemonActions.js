@@ -1,78 +1,29 @@
-// pokemonActions.js
 import axios from 'axios';
 import {
   FETCH_POKEMONS_REQUEST,
   FETCH_POKEMONS_SUCCESS,
   FETCH_POKEMONS_FAILURE,
-  CREATE_POKEMON_REQUEST,
   CREATE_POKEMON_SUCCESS,
   CREATE_POKEMON_FAILURE,
 } from './actionTypes';
 
-export const fetchPokemons = () => {
-  return (dispatch) => {
-    dispatch(fetchPokemonsRequest());
-    axios
-      .get('/pokemons')
-      .then((response) => {
-        dispatch(fetchPokemonsSuccess(response.data));
-      })
-      .catch((error) => {
-        dispatch(fetchPokemonsFailure(error.message));
-      });
-  };
+const BASE_URL = 'http://localhost:3001/pokemons';
+
+export const fetchPokemons = (source = 'db') => async (dispatch) => {
+  dispatch({ type: FETCH_POKEMONS_REQUEST });
+  try {
+    const response = await axios.get(`${BASE_URL}?source=${source}`);
+    dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
+  }
 };
 
-const fetchPokemonsRequest = () => {
-  return {
-    type: FETCH_POKEMONS_REQUEST,
-  };
-};
-
-const fetchPokemonsSuccess = (pokemons) => {
-  return {
-    type: FETCH_POKEMONS_SUCCESS,
-    payload: pokemons,
-  };
-};
-
-const fetchPokemonsFailure = (error) => {
-  return {
-    type: FETCH_POKEMONS_FAILURE,
-    payload: error,
-  };
-};
-
-export const createPokemon = (pokemonData) => {
-  return (dispatch) => {
-    dispatch(createPokemonRequest());
-    axios
-      .post('/pokemons', pokemonData)
-      .then((response) => {
-        dispatch(createPokemonSuccess(response.data));
-      })
-      .catch((error) => {
-        dispatch(createPokemonFailure(error.message));
-      });
-  };
-};
-
-const createPokemonRequest = () => {
-  return {
-    type: CREATE_POKEMON_REQUEST,
-  };
-};
-
-const createPokemonSuccess = (pokemon) => {
-  return {
-    type: CREATE_POKEMON_SUCCESS,
-    payload: pokemon,
-  };
-};
-
-const createPokemonFailure = (error) => {
-  return {
-    type: CREATE_POKEMON_FAILURE,
-    payload: error,
-  };
+export const createPokemon = (pokemonData) => async (dispatch) => {
+  try {
+    const response = await axios.post(BASE_URL, pokemonData);
+    dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: CREATE_POKEMON_FAILURE, payload: error.message });
+  }
 };
