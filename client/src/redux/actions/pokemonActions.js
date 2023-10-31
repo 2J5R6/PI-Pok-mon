@@ -10,6 +10,10 @@ import {
   FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS,
   FETCH_POKEMON_BY_NAME_OR_ID_FAILURE,
   SET_DATA_SOURCE,
+  SORT_BY_ID_ASC,
+  SORT_BY_ID_DESC,
+  SORT_BY_NAME_ASC,
+  SORT_BY_NAME_DESC,
 } from './actionTypes';
 import store from '../store';
 
@@ -43,6 +47,7 @@ export const createPokemon = (pokemonData) => async (dispatch) => {
     dispatch({ type: CREATE_POKEMON_FAILURE, payload: error.message });
   }
 };
+
 
 export const toggleFavorite = (pokemonId) => ({
   type: TOGGLE_FAVORITE,
@@ -78,4 +83,20 @@ export const filterPokemonsByType = (type, source = 'db') => async (dispatch) =>
 export const setDataSource = (source) => ({
   type: SET_DATA_SOURCE,
   payload: source
+});
+
+export const sortByIdAsc = () => ({
+  type: SORT_BY_ID_ASC
+});
+
+export const sortByIdDesc = () => ({
+  type: SORT_BY_ID_DESC
+});
+
+export const sortByNameAsc = () => ({
+  type: SORT_BY_NAME_ASC
+});
+
+export const sortByNameDesc = () => ({
+  type: SORT_BY_NAME_DESC
 });

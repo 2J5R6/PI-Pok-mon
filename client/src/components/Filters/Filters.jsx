@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { filterByType, filterBySource, sortBy } from '../../redux/actions/pokemonActions';
+import {
+  setDataSource,
+  filterByType,
+  sortByIdAsc,
+  sortByIdDesc,
+  sortByNameAsc,
+  sortByNameDesc
+} from '../../redux/actions/pokemonActions';
 import styles from './Filters.module.css';
 
 const Filters = () => {

@@ -48,6 +48,26 @@ const pokemonReducer = (state = initialState, action) => {
       return { ...state, isLoading: false, error: action.payload };
     case SET_DATA_SOURCE:
       return { ...state, dataSource: action.payload };
+    case SORT_BY_ID_ASC:
+      return {
+        ...state,
+        pokemons: [...state.pokemons].sort((a, b) => a.id - b.id)
+      };
+    case SORT_BY_ID_DESC:
+      return {
+        ...state,
+        pokemons: [...state.pokemons].sort((a, b) => b.id - a.id)
+      };
+    case SORT_BY_NAME_ASC:
+      return {
+        ...state,
+        pokemons: [...state.pokemons].sort((a, b) => a.name.localeCompare(b.name))
+      };
+    case SORT_BY_NAME_DESC:
+      return {
+        ...state,
+        pokemons: [...state.pokemons].sort((a, b) => b.name.localeCompare(a.name))
+      };
     default:
       return state;
   }
