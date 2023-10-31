@@ -1,29 +1,44 @@
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffcb05; /* Amarillo Pikachu */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-bottom: 4px solid #3b4cca; /* Azul Pokémon */
-  height: 60px;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
 }
 
 .navbar a {
   text-decoration: none;
-  color: #3b4cca; /* Azul Pokémon */
-  font-weight: bold;
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  padding: 10px 15px;
+  border-radius: 5px;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  background: linear-gradient(145deg, #f5f5f5, #e1e1e1);
+  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+}
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-  }
+.navbar a.active,
+.navbar a:hover {
+  background-color: var(--highlight-color);
+  transform: scale(1.05);
+}
 
-  &:active {
-    transform: scale(0.95);
-  }
+/* Estilos para el modo oscuro */
+:root[data-theme='dark'] {
+  --bg-color: #2c3e50;
+  --text-color: #ecf0f1;
+  --highlight-color: #e74c3c;
+}
+
+/* Estilos para el modo claro */
+:root[data-theme='light'] {
+  --bg-color: #ecf0f1;
+  --text-color: #2c3e50;
+  --highlight-color: #3498db;
 }
