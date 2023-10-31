@@ -13,7 +13,7 @@ import styles from './Filters.module.css';
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const dataSource = useSelector(state => state.pokemonReducer.dataSource);
+  const dataSource = useSelector(state => state.pokemons.dataSource);
 
   const handleDataSourceChange = (e) => {
     dispatch(setDataSource(e.target.value));
