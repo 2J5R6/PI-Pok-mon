@@ -8,12 +8,15 @@ import {
   TOGGLE_FAVORITE,
   FETCH_POKEMON_BY_NAME_OR_ID_REQUEST,
   FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS,
-  FETCH_POKEMON_BY_NAME_OR_ID_FAILURE
+  FETCH_POKEMON_BY_NAME_OR_ID_FAILURE,
+  SET_DATA_SOURCE,
 } from './actionTypes';
+import store from '../store';
 
 const BASE_URL = 'http://localhost:3001/pokemons';
 
-export const fetchPokemons = (source = 'db') => async (dispatch) => {
+export const fetchPokemons = () => async (dispatch) => {
+  const source = store.getState().pokemon.dataSource;
   dispatch({ type: FETCH_POKEMONS_REQUEST });
   try {
     const response = await axios.get(`${BASE_URL}?source=${source}`);
@@ -22,6 +25,15 @@ export const fetchPokemons = (source = 'db') => async (dispatch) => {
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
   }
 };
+// export const fetchPokemons = (source = 'db') => async (dispatch) => {
+//   dispatch({ type: FETCH_POKEMONS_REQUEST });
+//   try {
+//     const response = await axios.get(`${BASE_URL}?source=${source}`);
+//     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
+//   } catch (error) {
+//     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
+//   }
+// };
 
 export const createPokemon = (pokemonData) => async (dispatch) => {
   try {
