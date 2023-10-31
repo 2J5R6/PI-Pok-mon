@@ -16,7 +16,7 @@ import {
     searchedPokemon: [],
     createdPokemon: {},
     currentPage: 1,
-    totalPages: 1
+    totalPages: 0
   };
   
   function pokemonReducer(state = initialState, action) {
