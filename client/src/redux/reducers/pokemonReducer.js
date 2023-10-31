@@ -5,7 +5,8 @@ import {
     GET_POKEMON_TYPES,
     FILTER_POKEMONS_BY_TYPE,
     CREATE_POKEMON,
-    ORDER_POKEMONS
+    ORDER_POKEMONS,
+    SET_CURRENT_PAGE
   } from '../actions/pokemonActions';
   
   const initialState = {
@@ -13,7 +14,9 @@ import {
     pokemonDetail: {},
     pokemonTypes: [],
     searchedPokemon: [],
-    createdPokemon: {}
+    createdPokemon: {},
+    currentPage: 1,
+    totalPages: 1
   };
   
   function pokemonReducer(state = initialState, action) {
@@ -53,6 +56,11 @@ import {
                 ...state,
                 pokemons: Array.isArray(action.payload) ? action.payload : []
             };
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload
+              };
         default:
             return state;
     }
