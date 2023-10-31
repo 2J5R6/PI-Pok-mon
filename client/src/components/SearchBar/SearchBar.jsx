@@ -11,12 +11,15 @@ const SearchBar = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSearch = () => {
-    dispatch(searchPokemon(searchTerm));
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      dispatch(searchPokemon(searchTerm));
+    }
   };
 
   return (
-    <div className={styles.searchBarContainer}>
+    <form onSubmit={handleSearch} className={styles.searchForm}>
       <input
         type="text"
         placeholder="Buscar Pokemon..."
@@ -24,11 +27,12 @@ const SearchBar = () => {
         onChange={handleInputChange}
         className={styles.searchInput}
       />
-      <button onClick={handleSearch} className={styles.searchButton}>
+      <button type="submit" className={styles.searchButton}>
         Buscar
       </button>
-    </div>
+    </form>
   );
 };
 
 export default SearchBar;
+
