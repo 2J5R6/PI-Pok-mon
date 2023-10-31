@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './Filter.module.css';
 
-const Filter = () => {
+const Filters = () => {
   const [selectedType, setSelectedType] = useState('');
   const [order, setOrder] = useState('');
   const dispatch = useDispatch();
@@ -40,4 +40,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default Filters;
