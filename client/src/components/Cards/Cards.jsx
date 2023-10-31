@@ -8,6 +8,7 @@ import { setCurrentPage } from '../../redux/actions/pokemonActions';
 const Cards = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector(state => state.pokemons);
+  const searchedPokemon = useSelector(state => state.searchedPokemon);
   const currentPage = useSelector(state => state.currentPage);
   const totalPages = useSelector(state => state.totalPages);
 
@@ -15,13 +16,16 @@ const Cards = () => {
     dispatch(setCurrentPage(pageNumber));
   };
 
-  if (!pokemons.length) {
-    return <p className={styles.errorMessage}>No se encontraron pokemons. Por favor, intenta nuevamente.</p>;
-  }
+  const displayPokemons = (searchedPokemon && searchedPokemon.length) ? searchedPokemon : pokemons;
+
+if (!displayPokemons || !displayPokemons.length) {
+  return <p className={styles.errorMessage}>No se encontraron pokemons. Por favor, intenta nuevamente.</p>;
+}
+
 
   return (
     <div className={styles.cardsContainer}>
-      {pokemons.map(pokemon => (
+      {displayPokemons.map(pokemon => (
         <MemoizedCard key={pokemon.id} pokemon={pokemon} />
       ))}
       <Pagination 
@@ -36,3 +40,4 @@ const Cards = () => {
 const MemoizedCard = React.memo(Card);
 
 export default Cards;
+
