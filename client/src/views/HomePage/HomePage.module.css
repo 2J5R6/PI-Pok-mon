@@ -1,15 +1,9 @@
-body{
-  background-image: url('../../assets/images/Pokémon-Journey.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0.7);
-  background-blend-mode: overlay;
-}
 .container {
-  /* background-image: url('../../assets/images/Pokémon-Journey.png');
+  background-image: url('../../assets/images/Pokemon-World.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat; 
+  /* background-blend-mode: overlay; */
   height: 100vh;
   display: flex;
   flex-direction: column;
