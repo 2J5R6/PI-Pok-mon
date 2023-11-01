@@ -65,17 +65,19 @@ export const getPokemonByNameOrId = (query, type) => async (dispatch) => {
 export const filterPokemonsByType = (type, source = 'db') => async (dispatch, getState) => {
   dispatch({ type: FETCH_POKEMONS_REQUEST });
   try {
+    if (type === "All") {
+      const allPokemons = getState().pokemons.allPokemons;
+      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: allPokemons });
+      return;
+    }
     const response = await axios.get(`${BASE_URL}/type/${type}?source=${source}`);
-    const allPokemons = getState().pokemons.allPokemons; // Obtener todos los Pokémon del estado
-    const filteredPokemons = response.data.filter(pokemon => 
-      allPokemons.some(p => p.id === pokemon.id)
-    ); // Filtrar solo los Pokémon que ya están en el estado
-    dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: filteredPokemons });
+    dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
   } catch (error) {
     console.error("Error filtering pokemons by type:", error);
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
   }
 };
+
 
 
 export const setDataSource = (source) => ({
