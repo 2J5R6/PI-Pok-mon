@@ -39,6 +39,11 @@ const Filters = () => {
   };
 
   const handleTypeFilter = (e) => {
+    if (e.target.value === "All") {
+      const searchedPokemons = useSelector(state => state.pokemons.searchedPokemons);
+      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
+      return;
+    }
     dispatch(filterPokemonsByType(e.target.value));
   };
 

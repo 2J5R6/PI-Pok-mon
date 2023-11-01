@@ -66,8 +66,8 @@ export const filterPokemonsByType = (type, source = 'db') => async (dispatch, ge
   dispatch({ type: FETCH_POKEMONS_REQUEST });
   try {
     if (type === "All") {
-      const allPokemons = getState().pokemons.allPokemons;
-      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: allPokemons });
+      const searchedPokemons = getState().pokemons.searchedPokemons;
+      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
       return;
     }
     const response = await axios.get(`${BASE_URL}/type/${type}?source=${source}`);
