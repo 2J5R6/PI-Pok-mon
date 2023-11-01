@@ -20,7 +20,7 @@ const Card = ({ pokemon }) => {
       <div className={styles.pokemonInfo}>
         <h2>{pokemon.name}</h2>
         <div>
-        {pokemon.types.map(type => (
+        {pokemon.types && pokemon.types.map(type => (
           <div key={type.id}>
               {type.name}
           </div>
