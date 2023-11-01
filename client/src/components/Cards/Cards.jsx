@@ -19,9 +19,11 @@ const Cards = () => {
 
   return (
     <div className={styles.cardsContainer}>
-      {pokemons.map(pokemon => (
-        <Card key={pokemon.id} pokemon={pokemon} />
-      ))}
+      {pokemons.length > 0 ? (
+        pokemons.map(pokemon => <Card key={pokemon.id} pokemon={pokemon} />)
+      ) : (
+        <p>No se encontraron Pokémon.</p>
+      )}
     </div>
   );
 };
