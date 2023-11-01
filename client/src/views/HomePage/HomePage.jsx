@@ -8,8 +8,7 @@ import styles from './HomePage.module.css';
 
 const HomePage = () => {
   const pokemons = useSelector(state => state.pokemons.data);
-  const randomPokemons = pokemons ? [pokemons[Math.floor(Math.random() * pokemons.length)], pokemons[Math.floor(Math.random() * pokemons.length)]] : [];
-  console.log("Pokemons en HomePage:", pokemons);
+
   return (
     <div className={styles.homePageContainer}>
       <NavBar />
@@ -17,7 +16,7 @@ const HomePage = () => {
       <div className={styles.contentArea}>
         <Filters />
         <div className={styles.cardsContainer}>
-          {randomPokemons.map(pokemon => (
+          {pokemons && pokemons.map(pokemon => (
             <Cards key={pokemon.id} pokemon={pokemon} />
           ))}
         </div>
