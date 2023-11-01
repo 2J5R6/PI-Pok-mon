@@ -7,7 +7,7 @@ import styles from './Cards.module.css';
 const Cards = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector(state => state.pokemons.data);
-  const isLoading = useSelector(state => state.pokemon.isLoading);
+  const isLoading = useSelector(state => state.pokemons.isLoading);
 
   useEffect(() => {
     if (pokemons.length === 0) {
