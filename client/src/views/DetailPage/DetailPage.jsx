@@ -13,19 +13,46 @@ function DetailPage() {
       <img src={pokemon.image} alt={pokemon.name} className={styles.image} />
       <h1 className={styles.name}>{pokemon.name.toUpperCase()}</h1>
       <p><strong>ID:</strong> {pokemon.id}</p>
-      <p><strong>Vida:</strong> {pokemon.hp}</p>
-      <p><strong>Ataque:</strong> {pokemon.attack}</p>
-      <p><strong>Defensa:</strong> {pokemon.defense}</p>
-      <p><strong>Velocidad:</strong> {pokemon.speed}</p>
-      <p><strong>Altura:</strong> {pokemon.height}</p>
-      <p><strong>Peso:</strong> {pokemon.weight}</p>
-      <p><strong>Tipo:</strong> 
-      {pokemon.types && pokemon.types.map(type => (
-          <div key={type.id}>
-              {type.name.toUpperCase()}
-          </div>
-        ))}
-      </p>
+      <div className={styles.stat}>
+        <strong>Vida:</strong>
+        <div className={styles.progressBar}>
+          <div className={styles.progress} style={{width: `${pokemon.hp}%`}}>{pokemon.hp}</div>
+        </div>
+      </div>
+      <div className={styles.stat}>
+        <strong>Ataque:</strong>
+        <div className={styles.progressBar}>
+          <div className={styles.progress} style={{width: `${pokemon.attack}%`}}>{pokemon.attack}</div>
+        </div>
+      </div>
+      <div className={styles.stat}>
+        <strong>Defensa:</strong>
+        <div className={styles.progressBar}>
+          <div className={styles.progress} style={{width: `${pokemon.defense}%`}}>{pokemon.defense}</div>
+        </div>
+      </div>
+      <div className={styles.stat}>
+        <strong>Velocidad:</strong>
+        <div className={styles.progressBar}>
+          <div className={styles.progress} style={{width: `${pokemon.speed}%`}}>{pokemon.speed}</div>
+        </div>
+      </div>
+      <div className={styles.stat}>
+        <strong>Altura:</strong> {pokemon.height}
+      </div>
+      <div className={styles.stat}>
+        <strong>Peso:</strong> {pokemon.weight}
+      </div>
+
+      <div>
+        <strong>Tipo:</strong> 
+        {pokemon.types && pokemon.types.map(type => (
+            <div key={type.id} className={styles.type}>
+                {type.name.toUpperCase()}
+            </div>
+          ))}
+      </div>
+      
     </div>
   );
 }

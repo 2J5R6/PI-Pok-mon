@@ -1,29 +1,75 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* DetailPage.module.css */
+
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
+  background-image: url('../../assets/images/Pokemon-stats.png');
+  background-size: cover; /* Hace que la imagen de fondo cubra todo el contenedor */
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 20px;
+}
+
+.pokemonName {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.statContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.statName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.statValue {
+  font-size: 18px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hpBar {
+  width: 100px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: 10px;
+}
+
+.hpFill {
+  height: 100%;
+  background-color: #ff0000;
+  border-radius: 10px;
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 768px) {
+  .pokemonName {
+      font-size: 24px; /* Reduce el tamaño de la fuente para dispositivos más pequeños */
   }
-  
-  .image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 20px;
+
+  .statName {
+      font-size: 18px;
   }
-  
-  .name {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+
+  .statValue {
+      font-size: 16px;
   }
-  
-  p {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  
+
+  /* Ajusta cualquier otro estilo según lo necesites para dispositivos más pequeños */
+}
