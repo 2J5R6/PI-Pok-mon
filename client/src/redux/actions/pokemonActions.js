@@ -14,8 +14,9 @@ import {
   SORT_BY_ID_DESC,
   SORT_BY_NAME_ASC,
   SORT_BY_NAME_DESC,
-  SET_SEARCHED_POKEMONS,
-  SET_POKEMONS
+  // SET_SEARCHED_POKEMONS,
+  // SET_POKEMONS,
+  ADD_TO_SEARCHED_POKEMONS
 } from './actionTypes';
 import store from '../store';
 
@@ -58,6 +59,7 @@ export const getPokemonByNameOrId = (query, type) => async (dispatch) => {
       response = await axios.get(`${BASE_URL}/name/${query}?source=db`);
     }
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS, payload: response.data });
+    dispatch({ type: ADD_TO_SEARCHED_POKEMONS, payload: response.data });
   } catch (error) {
     console.error("Error fetching pokemon by name or ID:", error);
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_FAILURE, payload: error.message });
@@ -69,15 +71,14 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
   try {
     if (type === "All") {
       const searchedPokemons = getState().pokemons.searchedPokemons;
-      dispatch({ type: SET_POKEMONS, payload: searchedPokemons });
+      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
       return;
     }
-    const currentPokemons = getState().pokemons.pokemons;
+    const currentPokemons = getState().pokemons.searchedPokemons;
     const filteredPokemons = currentPokemons.filter(pokemon => 
       pokemon.types && pokemon.types.some(t => t.name === type)
     );
     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: filteredPokemons });
-    dispatch({ type: SET_SEARCHED_POKEMONS, payload: filteredPokemons }); 
   } catch (error) {
     console.error("Error filtering pokemons by type:", error);
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });

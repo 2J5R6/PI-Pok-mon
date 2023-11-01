@@ -14,7 +14,7 @@ import styles from './Filters.module.css';
 const Filters = () => {
   const dispatch = useDispatch();
   const dataSource = useSelector(state => state.pokemons.dataSource);
-  const searchedPokemons = useSelector(state => state.pokemons.searchedPokemons);
+  // const searchedPokemons = useSelector(state => state.pokemons.searchedPokemons);
 
   const handleDataSourceChange = (e) => {
     dispatch(setDataSource(e.target.value));
@@ -40,11 +40,8 @@ const Filters = () => {
   };
 
   const handleTypeFilter = (e) => {
-  if (e.target.value === "All") {
-    dispatch({ type: 'SET_POKEMONS', payload: searchedPokemons });
-  } else {
-    dispatch(filterPokemonsByType(e.target.value));
-  }
+    const selectedType = e.target.value;
+    dispatch(filterPokemonsByType(selectedType));
 };
 
 
