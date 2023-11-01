@@ -7,7 +7,7 @@ import Filters from '../../components/Filters/Filters';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
-  const pokemons = useSelector(state => state.pokemons.pokemons);
+  const pokemons = useSelector(state => state.pokemons.searchedPokemons);
   const uniquePokemons = [...new Set(pokemons.map(pokemon => pokemon.id))].map(id => pokemons.find(pokemon => pokemon.id === id));
 
   return (
