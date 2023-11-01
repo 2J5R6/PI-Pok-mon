@@ -1,31 +1,25 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchPokemons } from '../../redux/actions/pokemonActions';
 import Card from '../Card/Card';
 import styles from './Cards.module.css';
 
-const Cards = () => {
+const Cards = ({ pokemon }) => {
   const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemons.data);
-  const isLoading = useSelector(state => state.pokemons.isLoading);
 
   useEffect(() => {
-    if (pokemons.length === 0) {
+    if (!pokemon) {
       dispatch(fetchPokemons());
     }
-  }, [dispatch, pokemons.length]);
-  
-  if (isLoading) {
+  }, [dispatch, pokemon]);
+  console.log("Pokemons en Cards:", pokemon);
+  if (!pokemon) {
     return <div className={styles.loading}>Cargando...</div>;
   }
 
   return (
     <div className={styles.cardsContainer}>
-      {pokemons.length > 0 ? (
-        pokemons.map(pokemon => <Card key={pokemon.id} pokemon={pokemon} />)
-      ) : (
-        <p>No se encontraron Pokémon.</p>
-      )}
+      <Card pokemon={pokemon} />
     </div>
   );
 };
