@@ -17,6 +17,7 @@ import {
 
 const initialState = {
   pokemons: [],
+  allPokemons: [],
   isLoading: false,
   error: null,
   createdPokemon: null,
@@ -30,7 +31,7 @@ const pokemonReducer = (state = initialState, action) => {
     case FETCH_POKEMONS_REQUEST:
       return { ...state, isLoading: true, error: null };
     case FETCH_POKEMONS_SUCCESS:
-      return { ...state, isLoading: false, pokemons: action.payload };
+      return { ...state, isLoading: false, pokemons: action.payload, allPokemons: action.payload,  };
     case FETCH_POKEMONS_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
     case CREATE_POKEMON_SUCCESS:
@@ -52,6 +53,7 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         pokemons: [...state.pokemons,action.payload], // Asegúrate de que los datos se almacenen en un array
+        allPokemons: [...state.allPokemons, action.payload],
         selectedPokemon: action.payload
     };
     case FETCH_POKEMON_BY_NAME_OR_ID_FAILURE:

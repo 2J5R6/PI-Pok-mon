@@ -66,7 +66,7 @@ export const filterPokemonsByType = (type, source = 'db') => async (dispatch, ge
   dispatch({ type: FETCH_POKEMONS_REQUEST });
   try {
     const response = await axios.get(`${BASE_URL}/type/${type}?source=${source}`);
-    const allPokemons = getState().pokemons.pokemons; // Obtener todos los Pokémon del estado
+    const allPokemons = getState().pokemons.allPokemons; // Obtener todos los Pokémon del estado
     const filteredPokemons = response.data.filter(pokemon => 
       allPokemons.some(p => p.id === pokemon.id)
     ); // Filtrar solo los Pokémon que ya están en el estado
