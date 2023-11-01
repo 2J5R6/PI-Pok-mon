@@ -1,38 +1,43 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toggleFavorite } from '../../redux/actions/pokemonActions'; // Asumiendo que tienes una acción llamada toggleFavorite en pokemonActions
+import { addToFavorites, removeFromFavorites } from '../../redux/actions/pokemonActions';
 import styles from './Card.module.css';
 
 const Card = ({ pokemon }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.pokemons.favorites); // Asumiendo que tienes un estado llamado favorites en el reducer de pokemon
+  const favorites = useSelector(state => state.pokemons.favorites);
 
-  const isFavorite = favorites.includes(pokemon.id);
+  const isFavorite = favorites.some(fav => fav.id === pokemon.id);
 
-  const handleFavorite = () => {
-    dispatch(toggleFavorite(pokemon.id));
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(pokemon));
+    } else {
+      dispatch(addToFavorites(pokemon));
+    }
   };
 
   return (
     <div className={styles.cardContainer}>
-      <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
-      <div className={styles.pokemonInfo}>
-        <h2>{pokemon.name}</h2>
-        <div>
-        {pokemon.types && pokemon.types.map(type => (
-          <div key={type.id}>
-              {type.name}
-          </div>
-        ))}
-        </div>
-        <button onClick={handleFavorite}>
-          {isFavorite ? '❤️' : '🤍'}
-        </button>
-        <Link to={`/pokemon/${pokemon.id}`} className={styles.detailsLink}>
-          Ver detalles
-        </Link>
+      <div className={styles.heartIcon} onClick={handleFavoriteClick}>
+        {isFavorite ? (
+          <i className={`fas fa-heart ${styles.favorite}`}></i>
+        ) : (
+          <i className="far fa-heart"></i>
+        )}
       </div>
+      <Link to={`/pokemon/${pokemon.id}`}>
+        <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
+        <div className={styles.pokemonDetails}>
+          <h2 className={styles.pokemonName}>{pokemon.name.toUpperCase()}</h2>
+          {pokemon.types && pokemon.types.map(type => (
+            <span key={type.id} className={styles.pokemonType}>
+              {type.name.toUpperCase()}
+            </span>
+          ))}
+        </div>
+      </Link>
     </div>
   );
 };

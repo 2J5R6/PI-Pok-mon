@@ -2,35 +2,59 @@
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 10px;
   padding: 10px;
   margin: 10px;
+  position: relative;
+}
+
+.heartIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  animation: pulse 1s;
+}
+
+.favorite {
+  color: red;
 }
 
 .pokemonImage {
   width: 100px;
   height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
   margin-right: 10px;
 }
 
-.pokemonInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.pokemonDetails {
+  flex: 1;
 }
 
-.detailsLink {
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007BFF;
-  cursor: pointer;
+.pokemonName {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-.detailsLink:hover {
-  text-decoration: underline;
-}
-h2{
+.pokemonType {
+  display: inline-block;
+  background-color: #eee;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
   text-transform: uppercase;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
