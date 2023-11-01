@@ -7,7 +7,7 @@ function DetailPage({ pokemon }) {
   return (
     <div className={styles.container}>
       <img src={pokemon.image} alt={pokemon.name} className={styles.image} />
-      <h1 className={styles.name}>{pokemon.name}</h1>
+      <h1 className={styles.name}>{pokemon.name.toUpperCase()}</h1>
       <p><strong>ID:</strong> {pokemon.id}</p>
       <p><strong>Vida:</strong> {pokemon.life}</p>
       <p><strong>Ataque:</strong> {pokemon.attack}</p>
