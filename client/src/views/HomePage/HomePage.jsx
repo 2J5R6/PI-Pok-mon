@@ -17,13 +17,10 @@ const HomePage = () => {
       <div className={styles.contentArea}>
         <Filters />
         <div className={styles.cardsContainer}>
-
-        {pokemons && pokemons.map(pokemon => (
+        {uniquePokemons && uniquePokemons.map(pokemon => (
             <Cards key={pokemon.id} pokemon={pokemon} />
           ))
         }
-
-
         </div>
       </div>
     </div>
