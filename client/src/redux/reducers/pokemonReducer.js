@@ -15,7 +15,9 @@ import {
   SORT_BY_NAME_DESC,
   SET_SEARCHED_POKEMONS,
   SET_POKEMONS,
-  ADD_TO_SEARCHED_POKEMONS
+  ADD_TO_SEARCHED_POKEMONS,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -97,7 +99,7 @@ const pokemonReducer = (state = initialState, action) => {
         searchedPokemons: action.payload,
       };
     case SET_POKEMONS:
-        return{
+      return{
         ...state,
         pokemons: action.payload
         }
@@ -105,6 +107,17 @@ const pokemonReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedPokemons: [...state.searchedPokemons, action.payload]
+      };
+    case ADD_TO_FAVORITES:
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload]
+      };
+
+    case REMOVE_FROM_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter(pokemon => pokemon.id !== action.payload.id)
       };
     default:
       return state;

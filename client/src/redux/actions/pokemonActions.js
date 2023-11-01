@@ -16,7 +16,9 @@ import {
   SORT_BY_NAME_DESC,
   // SET_SEARCHED_POKEMONS,
   // SET_POKEMONS,
-  ADD_TO_SEARCHED_POKEMONS
+  ADD_TO_SEARCHED_POKEMONS,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES
 } from './actionTypes';
 import store from '../store';
 
@@ -85,10 +87,6 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
   }
 };
 
-
-
-
-
 export const setDataSource = (source) => ({
   type: SET_DATA_SOURCE,
   payload: source
@@ -108,4 +106,14 @@ export const sortByNameAsc = () => ({
 
 export const sortByNameDesc = () => ({
   type: SORT_BY_NAME_DESC
+});
+
+export const addToFavorites = (pokemon) => ({
+  type: ADD_TO_FAVORITES,
+  payload: pokemon
+});
+
+export const removeFromFavorites = (pokemon) => ({
+  type: REMOVE_FROM_FAVORITES,
+  payload: pokemon
 });
