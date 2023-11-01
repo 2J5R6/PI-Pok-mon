@@ -67,12 +67,10 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
   try {
     if (type === "All") {
       const searchedPokemons = getState().pokemons.searchedPokemons;
-      if (searchedPokemons.length) {
-        dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
-        return;
-      }
+      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
+      return;
     }
-    const currentPokemons = getState().pokemons.searchedPokemons;
+    const currentPokemons = getState().pokemons.pokemons;
     const filteredPokemons = currentPokemons.filter(pokemon => 
       pokemon.types && pokemon.types.some(t => t.name === type)
     );
