@@ -22,9 +22,9 @@ const Card = ({ pokemon }) => {
     <div className={styles.cardContainer}>
       <div className={styles.heartIcon} onClick={handleFavoriteClick}>
         {isFavorite ? (
-          <i className={`fas fa-heart ${styles.favorite}`}></i>
+          <i className={`fas fa-heart ${styles.favorite}`}>❤️</i>
         ) : (
-          <i className="far fa-heart"></i>
+          <i className="far fa-heart">🤍</i>
         )}
       </div>
       <Link to={`/pokemon/${pokemon.id}`}>
