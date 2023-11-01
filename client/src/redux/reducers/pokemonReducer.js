@@ -48,7 +48,12 @@ const pokemonReducer = (state = initialState, action) => {
     case FETCH_POKEMON_BY_NAME_OR_ID_REQUEST:
       return { ...state, isLoading: true, error: null, selectedPokemon: null };
     case FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS:
-      return { ...state, isLoading: false, selectedPokemon: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        pokemons: [action.payload], // Asegúrate de que los datos se almacenen en un array
+        selectedPokemon: action.payload
+    };
     case FETCH_POKEMON_BY_NAME_OR_ID_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
     case SET_DATA_SOURCE:
