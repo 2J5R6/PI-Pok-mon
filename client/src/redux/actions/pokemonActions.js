@@ -26,28 +26,20 @@ export const fetchPokemons = () => async (dispatch) => {
     const response = await axios.get(`${BASE_URL}?source=${source}`);
     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
   } catch (error) {
+    console.error("Error fetching pokemons:", error);
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
   }
 };
-// export const fetchPokemons = (source = 'db') => async (dispatch) => {
-//   dispatch({ type: FETCH_POKEMONS_REQUEST });
-//   try {
-//     const response = await axios.get(`${BASE_URL}?source=${source}`);
-//     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
-//   } catch (error) {
-//     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
-//   }
-// };
 
 export const createPokemon = (pokemonData) => async (dispatch) => {
   try {
     const response = await axios.post(BASE_URL, pokemonData);
     dispatch({ type: CREATE_POKEMON_SUCCESS, payload: response.data });
   } catch (error) {
+    console.error("Error creating pokemon:", error);
     dispatch({ type: CREATE_POKEMON_FAILURE, payload: error.message });
   }
 };
-
 
 export const toggleFavorite = (pokemonId) => ({
   type: TOGGLE_FAVORITE,
@@ -65,6 +57,7 @@ export const getPokemonByNameOrId = (query, type) => async (dispatch) => {
     }
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_SUCCESS, payload: response.data });
   } catch (error) {
+    console.error("Error fetching pokemon by name or ID:", error);
     dispatch({ type: FETCH_POKEMON_BY_NAME_OR_ID_FAILURE, payload: error.message });
   }
 };
@@ -75,11 +68,11 @@ export const filterPokemonsByType = (type, source = 'db') => async (dispatch) =>
     const response = await axios.get(`${BASE_URL}/type/${type}?source=${source}`);
     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: response.data });
   } catch (error) {
+    console.error("Error filtering pokemons by type:", error);
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });
   }
 };
 
-// Acción para cambiar la fuente de datos
 export const setDataSource = (source) => ({
   type: SET_DATA_SOURCE,
   payload: source
