@@ -14,6 +14,7 @@ import {
   SORT_BY_NAME_ASC,
   SORT_BY_NAME_DESC,
   SET_SEARCHED_POKEMONS,
+  SET_POKEMONS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -94,6 +95,11 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         searchedPokemons: action.payload,
       };
+    case SET_POKEMONS:
+        return{
+        ...state,
+        pokemons: action.payload
+        }
     default:
       return state;
   }

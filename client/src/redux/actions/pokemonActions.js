@@ -14,7 +14,8 @@ import {
   SORT_BY_ID_DESC,
   SORT_BY_NAME_ASC,
   SORT_BY_NAME_DESC,
-  SET_SEARCHED_POKEMONS
+  SET_SEARCHED_POKEMONS,
+  SET_POKEMONS
 } from './actionTypes';
 import store from '../store';
 
@@ -68,7 +69,7 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
   try {
     if (type === "All") {
       const searchedPokemons = getState().pokemons.searchedPokemons;
-      dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
+      dispatch({ type: SET_POKEMONS, payload: searchedPokemons });
       return;
     }
     const currentPokemons = getState().pokemons.pokemons;
