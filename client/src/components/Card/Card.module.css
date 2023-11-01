@@ -31,3 +31,6 @@
 .detailsLink:hover {
   text-decoration: underline;
 }
+h2{
+  text-transform: uppercase;
+}

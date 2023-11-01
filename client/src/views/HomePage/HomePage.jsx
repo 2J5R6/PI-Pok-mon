@@ -18,10 +18,12 @@ const HomePage = () => {
         <Filters />
         <div className={styles.cardsContainer}>
 
-        {uniquePokemons && uniquePokemons.map(pokemon => (
+        {pokemons && pokemons.map(pokemon => (
             <Cards key={pokemon.id} pokemon={pokemon} />
-          ))}
-          
+          ))
+        }
+
+
         </div>
       </div>
     </div>
