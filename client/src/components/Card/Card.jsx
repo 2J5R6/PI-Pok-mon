@@ -6,7 +6,7 @@ import styles from './Card.module.css';
 
 const Card = ({ pokemon }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.pokemon.favorites); // Asumiendo que tienes un estado llamado favorites en el reducer de pokemon
+  const favorites = useSelector(state => state.pokemons.favorites); // Asumiendo que tienes un estado llamado favorites en el reducer de pokemon
 
   const isFavorite = favorites.includes(pokemon.id);
 
