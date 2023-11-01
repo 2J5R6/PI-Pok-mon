@@ -17,7 +17,7 @@ import {
 
 const initialState = {
   pokemons: [],
-  allPokemons: [],
+  searchedPokemons: [],
   isLoading: false,
   error: null,
   createdPokemon: null,
@@ -53,7 +53,7 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         pokemons: [...state.pokemons,action.payload], // Asegúrate de que los datos se almacenen en un array
-        allPokemons: [...state.pokemons, action.payload],
+        searchedPokemons: [...state.searchedPokemons, action.payload],
         selectedPokemon: action.payload
     };
     case FETCH_POKEMON_BY_NAME_OR_ID_FAILURE:
