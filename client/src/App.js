@@ -15,7 +15,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/pokemon/:id" element={<DetailPage />} /> 
         <Route path="/create" element={<FormPage />}/>
-        <Route path="/favorites" component={Favorites} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/*" element={<NavBar />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>

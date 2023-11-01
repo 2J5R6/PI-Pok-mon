@@ -4,7 +4,7 @@ import Card from '../../components/Card/Card';
 import styles from './Favorites.module.css';
 
 const Favorites = () => {
-  const favorites = useSelector(state => state.pokemon.favorites);
+  const favorites = useSelector(state => state.favorites);
 
   return (
     <div className={styles.favoritesContainer}>
