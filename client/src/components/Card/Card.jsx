@@ -19,7 +19,9 @@ const Card = ({ pokemon }) => {
       <img src={pokemon.image} alt={pokemon.name} className={styles.pokemonImage} />
       <div className={styles.pokemonInfo}>
         <h2>{pokemon.name}</h2>
-        <p>{pokemon.types.join(', ')}</p>
+        <div>
+          {pokemon.types.map(type => <span key={type.id}>{type.name}</span>)}
+        </div>
         <button onClick={handleFavorite}>
           {isFavorite ? '❤️' : '🤍'}
         </button>
