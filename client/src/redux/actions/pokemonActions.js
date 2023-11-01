@@ -70,7 +70,7 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
       dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: searchedPokemons });
       return;
     }
-    const currentPokemons = getState().pokemons.pokemons;
+    const currentPokemons = getState().pokemons.searchedPokemons;
     const filteredPokemons = currentPokemons.filter(pokemon => 
       pokemon.types && pokemon.types.some(t => t.name === type)
     );
