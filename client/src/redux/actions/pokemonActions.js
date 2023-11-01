@@ -14,6 +14,7 @@ import {
   SORT_BY_ID_DESC,
   SORT_BY_NAME_ASC,
   SORT_BY_NAME_DESC,
+  SET_SEARCHED_POKEMONS
 } from './actionTypes';
 import store from '../store';
 
@@ -75,6 +76,7 @@ export const filterPokemonsByType = (type) => async (dispatch, getState) => {
       pokemon.types && pokemon.types.some(t => t.name === type)
     );
     dispatch({ type: FETCH_POKEMONS_SUCCESS, payload: filteredPokemons });
+    dispatch({ type: SET_SEARCHED_POKEMONS, payload: filteredPokemons }); 
   } catch (error) {
     console.error("Error filtering pokemons by type:", error);
     dispatch({ type: FETCH_POKEMONS_FAILURE, payload: error.message });

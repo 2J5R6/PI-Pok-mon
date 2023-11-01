@@ -12,7 +12,8 @@ import {
   SORT_BY_ID_ASC,
   SORT_BY_ID_DESC,
   SORT_BY_NAME_ASC,
-  SORT_BY_NAME_DESC
+  SORT_BY_NAME_DESC,
+  SET_SEARCHED_POKEMONS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -61,24 +62,37 @@ const pokemonReducer = (state = initialState, action) => {
     case SET_DATA_SOURCE:
       return { ...state, dataSource: action.payload };
     case SORT_BY_ID_ASC:
+      const sortedByIdAsc = [...state.pokemons].sort((a, b) => a.id - b.id);
       return {
         ...state,
-        pokemons: [...state.pokemons].sort((a, b) => a.id - b.id)
+        pokemons: sortedByIdAsc,
+        searchedPokemons: sortedByIdAsc
       };
     case SORT_BY_ID_DESC:
+      const sortedByIdDesc = [...state.pokemons].sort((a, b) => b.id - a.id);
       return {
         ...state,
-        pokemons: [...state.pokemons].sort((a, b) => b.id - a.id)
+        pokemons: sortedByIdDesc,
+        searchedPokemons: sortedByIdDesc
       };
     case SORT_BY_NAME_ASC:
+      const sortByIDNameAsc = [...state.pokemons].sort((a, b) => a.name.localeCompare(b.name))
       return {
         ...state,
-        pokemons: [...state.pokemons].sort((a, b) => a.name.localeCompare(b.name))
+        pokemons: sortByIDNameAsc,
+        searchedPokemons: sortByIDNameAsc
       };
     case SORT_BY_NAME_DESC:
+      const sortByIDNameDesc = [...state.pokemons].sort((a, b) => b.name.localeCompare(a.name))
+      return {
+        ...state, 
+        pokemons: sortByIDNameDesc,
+        searchedPokemons: sortByIDNameDesc
+      };
+    case SET_SEARCHED_POKEMONS:
       return {
         ...state,
-        pokemons: [...state.pokemons].sort((a, b) => b.name.localeCompare(a.name))
+        searchedPokemons: action.payload,
       };
     default:
       return state;

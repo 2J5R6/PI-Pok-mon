@@ -12,3 +12,4 @@ export const SORT_BY_ID_ASC = 'SORT_BY_ID_ASC';
 export const SORT_BY_ID_DESC = 'SORT_BY_ID_DESC';
 export const SORT_BY_NAME_ASC = 'SORT_BY_NAME_ASC';
 export const SORT_BY_NAME_DESC = 'SORT_BY_NAME_DESC';
+export const SET_SEARCHED_POKEMONS = 'SET_SEARCHED_POKEMONS';
