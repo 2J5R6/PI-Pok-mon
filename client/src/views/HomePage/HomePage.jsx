@@ -7,7 +7,10 @@ import Filters from '../../components/Filters/Filters';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
-  const pokemons = useSelector(state => state.pokemons.data);
+  const pokemons = useSelector(state => state.pokemons.pokemons);
+
+  const randomPokemons = pokemons && pokemons.length > 0 ? 
+  [pokemons[Math.floor(Math.random() * pokemons.length)], pokemons[Math.floor(Math.random() * pokemons.length)]] : [];
 
   return (
     <div className={styles.homePageContainer}>
@@ -16,6 +19,11 @@ const HomePage = () => {
       <div className={styles.contentArea}>
         <Filters />
         <div className={styles.cardsContainer}>
+        {randomPokemons.map(pokemon => (
+          <Cards key={pokemon.id} pokemon={pokemon} />
+        ))}
+
+
           {pokemons && pokemons.map(pokemon => (
             <Cards key={pokemon.id} pokemon={pokemon} />
           ))}
