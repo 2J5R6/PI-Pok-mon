@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from '../../components/NavBar/NavBar';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styles from './DetailPage.module.css';
@@ -9,6 +10,9 @@ function DetailPage() {
   if (!pokemon) return <div>Loading...</div>;
 
   return (
+  <>
+    <NavBar />
+  
     <div className={styles.container}>
       <div className={styles.content}>
         <img src={pokemon.image} alt={pokemon.name} className={styles.image} />
@@ -54,7 +58,7 @@ function DetailPage() {
         </div>
       </div>
     </div>
+</>
   );
 }
-
 export default DetailPage;

@@ -11,12 +11,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/*" element={<NavBar />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/pokemon/:id" element={<DetailPage />} /> 
         <Route path="/create" element={<FormPage />}/>
+        <Route path="/*" element={<NavBar />} />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
+
     </div>
   );
 }
