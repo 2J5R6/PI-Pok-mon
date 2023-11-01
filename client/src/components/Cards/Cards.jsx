@@ -6,13 +6,15 @@ import styles from './Cards.module.css';
 
 const Cards = () => {
   const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemon.pokemons);
+  const pokemons = useSelector(state => state.pokemons.data);
   const isLoading = useSelector(state => state.pokemon.isLoading);
 
   useEffect(() => {
-    dispatch(fetchPokemons());
-  }, [dispatch]);
-
+    if (pokemons.length === 0) {
+      dispatch(fetchPokemons());
+    }
+  }, [dispatch, pokemons.length]);
+  
   if (isLoading) {
     return <div className={styles.loading}>Cargando...</div>;
   }
